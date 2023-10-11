@@ -30,7 +30,9 @@ db.init_app(app)
 jwt = JWTManager(app)
 
 
-CORS(app)
+# CORS(app)
+frontend_origin = 'https://muthuieric.github.io'
+CORS(app, resources={r"/api/*": {"origins": frontend_origin}})
 
 
 
