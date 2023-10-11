@@ -31,9 +31,11 @@ jwt = JWTManager(app)
 
 
 # CORS(app)
-frontend_origin = 'https://muthuieric.github.io'
-CORS(app, resources={r"/api/*": {"origins": frontend_origin}})
+# frontend_origin = 'https://muthuieric.github.io'
+# CORS(app, resources={r"/api/*": {"origins": frontend_origin}})
 
+CORS(app, origins=["https://muthuieric.github.io'", "http://localhost:3000"],
+methods=['GET', 'POST'], allow_headers=['Authorization', 'Content-Type', 'x-access-token'])
 
 
 api = Api(app)
@@ -192,12 +194,8 @@ def register_user():
     db.session.add(new_user)
     db.session.commit()
 
+    return jsonify({"message": "User registered successfully"}), 201  # Return a success response
 
-    response = make_response('Registration successful')  # You can change the response message
-    response.headers.add('Access-Control-Allow-Origin', frontend_origin)  # Allow the frontend origin
-    return response
-
-    # return jsonify({"message": "User registered successfully"}), 201  # Return a success response
 # login
 @app.route('/login', methods=['POST'])
 def login():
