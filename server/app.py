@@ -192,8 +192,12 @@ def register_user():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({"message": "User registered successfully"}), 201  # Return a success response
 
+    response = make_response('Registration successful')  # You can change the response message
+    response.headers.add('Access-Control-Allow-Origin', frontend_origin)  # Allow the frontend origin
+    return response
+
+    # return jsonify({"message": "User registered successfully"}), 201  # Return a success response
 # login
 @app.route('/login', methods=['POST'])
 def login():
