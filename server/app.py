@@ -31,11 +31,13 @@ jwt = JWTManager(app)
 
 
 # CORS(app)
-# frontend_origin = 'https://muthuieric.github.io'
-# CORS(app, resources={r"/api/*": {"origins": frontend_origin}})
 
-CORS(app, origins=["https://muthuieric.github.io'", "http://localhost:3000"],
-methods=['GET', 'POST'], allow_headers=['Authorization', 'Content-Type', 'x-access-token'])
+# CORS(app, origins=["https://muthuieric.github.io'", "http://localhost:3000"],
+# methods=['GET', 'POST'], allow_headers=['Authorization', 'Content-Type', 'x-access-token'])
+
+frontend_origin = 'https://muthuieric.github.io'
+
+CORS(app, resources={r"/api/*": {"origins": frontend_origin}})
 
 
 api = Api(app)
